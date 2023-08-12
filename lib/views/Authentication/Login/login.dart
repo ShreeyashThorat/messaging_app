@@ -174,7 +174,6 @@ class _LoginScreenState extends State<LoginScreen> {
             bloc: loginBloc,
             listener: (context, state) {
               if (state is LoginSuccess) {
-                print(state.user);
                 Navigator.push(
                     context,
                     MaterialPageRoute(

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:hive/hive.dart';
 
 import '../../core/api.dart';
 import '../models/user_model.dart';
@@ -42,8 +41,6 @@ class AuthRepo {
           throw Exception("${response.data['message']}");
         } else {
           UserModel user = UserModel.fromJson(response.data['data']);
-          final userBox = await Hive.openBox('user_box');
-          userBox.put('user_data', user.toJson());
           return user;
         }
       } else {
@@ -71,8 +68,6 @@ class AuthRepo {
           throw Exception("${response.data['message']}");
         } else {
           UserModel user = UserModel.fromJson(response.data['data']);
-          final userBox = await Hive.openBox('user_box');
-          userBox.put('user_data', user.toJson());
           return user;
         }
       } else {

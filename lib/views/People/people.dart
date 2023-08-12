@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:messaging_app/views/People/bloc/get_all_users_bloc.dart';
 
 import '../../utils/color_theme.dart';
@@ -15,7 +14,7 @@ class PeopleScreen extends StatefulWidget {
 
 class _PeopleScreenState extends State<PeopleScreen> {
   final GetAllUsersBloc getAllUsersBloc = GetAllUsersBloc();
-  final String userId = "64c4bee2ca08372c699b97a8";
+  final String userId = "64c68e3067f70b15dd6365b2";
 
   @override
   void initState() {
@@ -36,7 +35,9 @@ class _PeopleScreenState extends State<PeopleScreen> {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                getAllUsersBloc.add(GetAllUser(userId: userId));
+              },
               icon: const Icon(
                 Icons.refresh,
                 color: Colors.white,
@@ -45,11 +46,11 @@ class _PeopleScreenState extends State<PeopleScreen> {
             color: Colors.white,
             onSelected: (value) async {
               debugPrint(value);
-              if (value == "Logout") {
-                final userBox = await Hive.openBox('user_box');
-                userBox.delete('user_data');
-                debugPrint("done");
-              }
+              // if (value == "Logout") {
+              //   final userBox = await Hive.openBox('user_box');
+              //   userBox.delete('user_data');
+              //   debugPrint("done");
+              // }
             },
             itemBuilder: (BuildContext contesxt) {
               return [
