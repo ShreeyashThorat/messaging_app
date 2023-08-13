@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:messaging_app/data/models/user_model.dart';
+import 'package:messaging_app/database/user_database.dart';
 
 import '../../../../data/repos/auth_repo.dart';
 
@@ -17,8 +20,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       UserModel user =
           await authRepo.login(event.number, event.password, event.deviceToken);
+      await UserDB.saveUserData(user);
       emit(LoginSuccess(user: user));
     } catch (e) {
+      log(e.toString());
       emit(LoginError(errorMsg: e.toString()));
     }
   }

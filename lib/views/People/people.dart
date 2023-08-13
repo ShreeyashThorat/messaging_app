@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:messaging_app/data/models/user_model.dart';
 import 'package:messaging_app/views/People/bloc/get_all_users_bloc.dart';
 
+import '../../database/user_database.dart';
 import '../../utils/color_theme.dart';
 
 class PeopleScreen extends StatefulWidget {
@@ -14,12 +18,20 @@ class PeopleScreen extends StatefulWidget {
 
 class _PeopleScreenState extends State<PeopleScreen> {
   final GetAllUsersBloc getAllUsersBloc = GetAllUsersBloc();
-  final String userId = "64c68e3067f70b15dd6365b2";
 
   @override
   void initState() {
-    getAllUsersBloc.add(GetAllUser(userId: userId));
+    getAllUsers();
     super.initState();
+  }
+
+  Future<void> getAllUsers() async {
+    try {
+      UserModel? userData = await UserDB.getUserData();
+      getAllUsersBloc.add(GetAllUser(userId: userData!.sId!));
+    } catch (e) {
+      log(e.toString());
+    }
   }
 
   @override
@@ -36,7 +48,7 @@ class _PeopleScreenState extends State<PeopleScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                getAllUsersBloc.add(GetAllUser(userId: userId));
+                getAllUsers();
               },
               icon: const Icon(
                 Icons.refresh,

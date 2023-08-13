@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
@@ -5,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:messaging_app/data/repos/auth_repo.dart';
 
 import '../../../../data/models/user_model.dart';
+import '../../../../database/user_database.dart';
 
 part 'create_user_event.dart';
 part 'create_user_state.dart';
@@ -49,8 +51,11 @@ class CreateUserBloc extends Bloc<CreateUserEvent, CreateUserState> {
           event.states,
           event.introduction,
           event.deviceToken);
+      await UserDB.saveUserData(user);
+
       emit(CreateUserSuccessfully(user: user));
     } catch (e) {
+      log(e.toString());
       emit(CreateUserError(errorMsg: 'Failed to register...try again'));
     }
   }

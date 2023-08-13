@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:messaging_app/views/People/view%20profile/view_profile.dart';
 
 class UserFriends extends StatefulWidget {
   const UserFriends({super.key});
@@ -44,6 +45,10 @@ class _UserFriendsState extends State<UserFriends> {
                     fontSize: 13,
                   ),
                 ),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => const ViewProfile()));
+                },
               ),
               const Divider(
                 thickness: 1,
