@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:messaging_app/utils/color_theme.dart';
+import 'package:messaging_app/widgets/read_more_text.dart';
 
 class ViewProfile extends StatefulWidget {
   const ViewProfile({super.key});
@@ -32,8 +34,12 @@ class _ViewProfileState extends State<ViewProfile> {
             )),
         actions: [
           PopupMenuButton<String>(
+            icon: FaIcon(
+              FontAwesomeIcons.ellipsisVertical,
+              color: ColorTheme.kPrimaryColor,
+            ),
             color: Colors.white,
-            iconSize: 20,
+            iconSize: 18,
             onSelected: (value) {
               debugPrint(value);
             },
@@ -49,16 +55,12 @@ class _ViewProfileState extends State<ViewProfile> {
         ],
       ),
       body: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
         children: [
           Container(
             height: size.height * 0.30,
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+            // margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.elliptical(75, 15),
-                    topRight: Radius.circular(15),
-                    bottomLeft: Radius.circular(15),
-                    bottomRight: Radius.elliptical(75, 15)),
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: CachedNetworkImageProvider(
@@ -100,27 +102,25 @@ class _ViewProfileState extends State<ViewProfile> {
                   ],
                 ),
                 SizedBox(
-                    width: size.width * 0.4,
-                    height: 48,
                     child: ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStatePropertyAll(ColorTheme.kPrimaryColor),
-                        shape: MaterialStateProperty.all(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                        ),
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStatePropertyAll(ColorTheme.kPrimaryColor),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
                       ),
-                      child: const Text(
-                        "Send Request",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      ),
-                    ))
+                    ),
+                  ),
+                  child: const Text(
+                    "Send Request",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white),
+                  ),
+                ))
               ],
             ),
           ),
@@ -132,7 +132,7 @@ class _ViewProfileState extends State<ViewProfile> {
             color: Colors.grey.shade300,
           ),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -140,20 +140,22 @@ class _ViewProfileState extends State<ViewProfile> {
                   "Introduction",
                   style: TextStyle(
                       fontSize: 19,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                       color: Colors.black87),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
-                Text(
-                  "Let your actions be guided by kindness, for it has the power to heal hearts and mend souls. Let your actions be guided by kindness, for it has the power to heal hearts and mend souls. Let your actions be guided by kindness, for it has the power to heal hearts and mend souls.",
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black87),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: ReadMore(
+                    text:
+                        "Let your actions be guided by kindness, for it has the power to heal hearts and mend souls. Let your actions be guided by kindness, for it has the power to heal hearts and mend souls. Let your actions be guided by kindness, for it has the power to heal hearts and mend souls.",
+                    textStyle: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black54),
+                  ),
                 )
               ],
             ),
@@ -179,20 +181,30 @@ class _ViewProfileState extends State<ViewProfile> {
             crossAxisSpacing: 2,
             mainAxisSpacing: 2,
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             children: List.generate(
               imgs.length,
-              (index) => CachedNetworkImage(
-                key: UniqueKey(),
-                fit: BoxFit.cover,
-                width: size.width * 0.33,
-                height: size.width * 0.33,
-                fadeInDuration: const Duration(milliseconds: 200),
-                fadeInCurve: Curves.easeInOut,
-                imageUrl: imgs[index],
-                placeholder: (context, url) => Container(
-                  color: const Color(0xfff8f8ff),
+              (index) => GestureDetector(
+                onTap: () {},
+                child: CachedNetworkImage(
+                  key: UniqueKey(),
+                  fit: BoxFit.cover,
+                  width: size.width * 0.33,
+                  height: size.width * 0.33,
+                  fadeInDuration: const Duration(milliseconds: 200),
+                  fadeInCurve: Curves.easeInOut,
+                  colorBlendMode: BlendMode.darken,
+                  color: imgs.length > 2
+                      ? index >= 2
+                          ? Colors.black.withOpacity(0.8)
+                          : Colors.transparent
+                      : Colors.transparent,
+                  imageUrl: imgs[index],
+                  placeholder: (context, url) => Container(
+                    color: const Color(0xfff8f8ff),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           )

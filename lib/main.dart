@@ -36,9 +36,15 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // transparent status bar
+      systemNavigationBarColor: Colors.transparent, // navigation bar color
+      statusBarIconBrightness: Brightness.light, // status bar icons' color
+      systemNavigationBarIconBrightness: Brightness.light,
+      //navigation bar icons' color
+    ));
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => BottomNavCubit()),
@@ -85,13 +91,6 @@ class _SplashSCreenState extends State<SplashSCreen> {
       ),
     );
   }
-
-  // void checkUser() async {
-  //   Navigator.pushAndRemoveUntil(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => const LoginScreen()),
-  //       (Route<dynamic> route) => false);
-  // }
 
   void checkUser() async {
     var userData = await UserDB.getUserData();
