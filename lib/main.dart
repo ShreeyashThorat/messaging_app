@@ -96,7 +96,7 @@ class _SplashSCreenState extends State<SplashSCreen> {
     var userData = await UserDB.getUserData();
 
     if (userData != null) {
-      log("$userData");
+      log(userData.toString());
       await Future.delayed(const Duration(seconds: 1)).then((value) {
         Navigator.pushAndRemoveUntil(
             context,
