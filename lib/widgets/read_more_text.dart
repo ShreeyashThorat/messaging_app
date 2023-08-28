@@ -42,7 +42,7 @@ class _ReadMoreState extends State<ReadMore> {
                 Text(
                   expanded == false ? "Show More" : "Show Less",
                   style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.w500,
                       color: ColorTheme.kPrimaryColor),
                 )

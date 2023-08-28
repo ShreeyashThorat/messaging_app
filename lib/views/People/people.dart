@@ -8,6 +8,7 @@ import 'package:messaging_app/views/People/bloc/get_all_users_bloc.dart';
 
 import '../../database/user_database.dart';
 import '../../utils/color_theme.dart';
+import 'view profile/view_profile.dart';
 
 class PeopleScreen extends StatefulWidget {
   const PeopleScreen({super.key});
@@ -159,6 +160,14 @@ class _PeopleScreenState extends State<PeopleScreen> {
                               fontSize: 13,
                             ),
                           ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => ViewProfile(
+                                          peopleData: data,
+                                        )));
+                          },
                         ),
                         const Divider(
                           thickness: 1,
@@ -174,74 +183,74 @@ class _PeopleScreenState extends State<PeopleScreen> {
   }
 }
 
-class PeoplesContent {
-  final String id;
-  final String imgUrl;
-  final String name;
-  final String bio;
-  PeoplesContent({
-    required this.id,
-    required this.imgUrl,
-    required this.bio,
-    required this.name,
-  });
-}
+// class PeoplesContent {
+//   final String id;
+//   final String imgUrl;
+//   final String name;
+//   final String bio;
+//   PeoplesContent({
+//     required this.id,
+//     required this.imgUrl,
+//     required this.bio,
+//     required this.name,
+//   });
+// }
 
-List<PeoplesContent> peoplesContent = [
-  PeoplesContent(
-    id: "123456",
-    imgUrl:
-        "https://img.freepik.com/premium-photo/woman-yellow-jacket-stands-front-building-with-sunset-background_25996-5250.jpg?size=626&ext=jpg&ga=GA1.1.106044016.1687106274&semt=sph",
-    bio:
-        "True strength is not measured by muscle, but by the resilience of the human spirit in the face of adversity.",
-    name: "Tejal",
-  ),
-  PeoplesContent(
-    id: "123456",
-    imgUrl:
-        "https://img.freepik.com/premium-vector/cute-little-boy-standing-with-arms-crossed-pose_535862-995.jpg?size=626&ext=jpg&ga=GA1.1.106044016.1687106274&semt=sph",
-    bio:
-        "Life's journey is not about reaching the destination, but savoring the beauty of every step along the way.",
-    name: "Hemang",
-  ),
-  PeoplesContent(
-    id: "234567",
-    imgUrl:
-        "https://img.freepik.com/free-vector/one-happy-boy-with-green-backpack_1308-69184.jpg?size=626&ext=jpg&ga=GA1.1.106044016.1687106274&semt=sph",
-    bio:
-        "Let your actions be guided by kindness, for it has the power to heal hearts and mend souls.",
-    name: "Diveysh",
-  ),
-  PeoplesContent(
-    id: "345678",
-    imgUrl:
-        "https://img.freepik.com/premium-vector/portrait-beautiful-girl-vector-cartoon-illustration_1196-945.jpg?size=626&ext=jpg&ga=GA1.1.106044016.1687106274&semt=sph",
-    bio:
-        "Like the moon embraces the night, find solace in accepting both the darkness and light within yourself.",
-    name: "Arpana",
-  ),
-  PeoplesContent(
-    id: "123456",
-    imgUrl:
-        "https://img.freepik.com/free-photo/asian-boy-malaysian-culture-innocent-concept_53876-31633.jpg?size=626&ext=jpg&ga=GA1.2.106044016.1687106274&semt=sph",
-    bio:
-        "https://img.freepik.com/free-vector/cute-boy-standing-position-showing-thumb_96037-450.jpg?size=626&ext=jpg&ga=GA1.2.106044016.1687106274&semt=sph",
-    name: "Atharva Sankhe",
-  ),
-  PeoplesContent(
-    id: "234567",
-    imgUrl:
-        "https://img.freepik.com/free-vector/happy-teen-cartoon-sitting-floor_1308-133774.jpg?size=626&ext=jpg&ga=GA1.2.106044016.1687106274&semt=sph",
-    bio:
-        "In the tapestry of time, every moment weaves a story that becomes the legacy of our existence.",
-    name: "Satyam",
-  ),
-  PeoplesContent(
-    id: "345678",
-    imgUrl:
-        "https://img.freepik.com/free-photo/portrait-smiling-beautiful-brunette-woman-cute-dress-red-lips-flowers-background-concept-professional-photossesion-modern-greenhouse_7502-8441.jpg?size=626&ext=jpg&ga=GA1.2.106044016.1687106274&semt=sph",
-    bio:
-        "Cherish the people who color your life with love, for they are the true masterpieces in your gallery of memories.",
-    name: "Krisha",
-  )
-];
+// List<PeoplesContent> peoplesContent = [
+//   PeoplesContent(
+//     id: "123456",
+//     imgUrl:
+//         "https://img.freepik.com/premium-photo/woman-yellow-jacket-stands-front-building-with-sunset-background_25996-5250.jpg?size=626&ext=jpg&ga=GA1.1.106044016.1687106274&semt=sph",
+//     bio:
+//         "True strength is not measured by muscle, but by the resilience of the human spirit in the face of adversity.",
+//     name: "Tejal",
+//   ),
+//   PeoplesContent(
+//     id: "123456",
+//     imgUrl:
+//         "https://img.freepik.com/premium-vector/cute-little-boy-standing-with-arms-crossed-pose_535862-995.jpg?size=626&ext=jpg&ga=GA1.1.106044016.1687106274&semt=sph",
+//     bio:
+//         "Life's journey is not about reaching the destination, but savoring the beauty of every step along the way.",
+//     name: "Hemang",
+//   ),
+//   PeoplesContent(
+//     id: "234567",
+//     imgUrl:
+//         "https://img.freepik.com/free-vector/one-happy-boy-with-green-backpack_1308-69184.jpg?size=626&ext=jpg&ga=GA1.1.106044016.1687106274&semt=sph",
+//     bio:
+//         "Let your actions be guided by kindness, for it has the power to heal hearts and mend souls.",
+//     name: "Diveysh",
+//   ),
+//   PeoplesContent(
+//     id: "345678",
+//     imgUrl:
+//         "https://img.freepik.com/premium-vector/portrait-beautiful-girl-vector-cartoon-illustration_1196-945.jpg?size=626&ext=jpg&ga=GA1.1.106044016.1687106274&semt=sph",
+//     bio:
+//         "Like the moon embraces the night, find solace in accepting both the darkness and light within yourself.",
+//     name: "Arpana",
+//   ),
+//   PeoplesContent(
+//     id: "123456",
+//     imgUrl:
+//         "https://img.freepik.com/free-photo/asian-boy-malaysian-culture-innocent-concept_53876-31633.jpg?size=626&ext=jpg&ga=GA1.2.106044016.1687106274&semt=sph",
+//     bio:
+//         "https://img.freepik.com/free-vector/cute-boy-standing-position-showing-thumb_96037-450.jpg?size=626&ext=jpg&ga=GA1.2.106044016.1687106274&semt=sph",
+//     name: "Atharva Sankhe",
+//   ),
+//   PeoplesContent(
+//     id: "234567",
+//     imgUrl:
+//         "https://img.freepik.com/free-vector/happy-teen-cartoon-sitting-floor_1308-133774.jpg?size=626&ext=jpg&ga=GA1.2.106044016.1687106274&semt=sph",
+//     bio:
+//         "In the tapestry of time, every moment weaves a story that becomes the legacy of our existence.",
+//     name: "Satyam",
+//   ),
+//   PeoplesContent(
+//     id: "345678",
+//     imgUrl:
+//         "https://img.freepik.com/free-photo/portrait-smiling-beautiful-brunette-woman-cute-dress-red-lips-flowers-background-concept-professional-photossesion-modern-greenhouse_7502-8441.jpg?size=626&ext=jpg&ga=GA1.2.106044016.1687106274&semt=sph",
+//     bio:
+//         "Cherish the people who color your life with love, for they are the true masterpieces in your gallery of memories.",
+//     name: "Krisha",
+//   )
+// ];
